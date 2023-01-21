@@ -76,13 +76,13 @@ if(length(ids_new_data) != 0) {
     return(sing_shark_df)
   })
 
-  saveRDS(new_shark_motion, file = paste0("./data/new_shark_motion_", datestamp, ".rds"))
+  saveRDS(new_sharks_motion, file = paste0("./data/new_shark_motion_", datestamp, ".rds"))
 
   live_sharks_motion <- readRDS("live_sharks_motion.rds")
 
   old_motions <- paste0(live_sharks_motion$dt_move, live_sharks_motion$coord.x, live_sharks_motion$coord.y, live_sharks_motion$id)
 
-  only_new_points <- new_shark_motion %>%
+  only_new_points <- new_sharks_motion %>%
     mutate(identifier = paste0(dt_move, coord.x, coord.y, id)) %>%
     filter(!identifier %in% old_motions) %>%
     select(-identifier)
